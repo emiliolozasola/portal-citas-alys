@@ -1,236 +1,360 @@
 
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ALYS Alimentos - Portal de Citas de Proveedores</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<title>ALYS Alimentos - Portal de Citas</title>
 
-        body {
-            font-family: Arial, sans-serif;
-            background: #f4f6f8;
-        }
+<style>
 
-        .header {
-            background: #2E7D32;
-            color: white;
-            text-align: center;
-            padding: 25px;
-        }
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
 
-        .header h1 {
-            font-size: 32px;
-        }
+body{
+    font-family:Arial,sans-serif;
+    background:#f4f6f8;
+}
 
-        .header p {
-            margin-top: 10px;
-            font-size: 16px;
-        }
+.header{
+    background:#2E7D32;
+    color:white;
+    text-align:center;
+    padding:30px;
+}
 
-        .container {
-            max-width: 900px;
-            margin: 30px auto;
-            padding: 20px;
-        }
+.logo{
+    max-width:220px;
+    background:white;
+    padding:10px;
+    border-radius:10px;
+    margin-bottom:15px;
+}
 
-        .card {
-            background: white;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
-        }
+.container{
+    max-width:900px;
+    margin:30px auto;
+    padding:20px;
+}
 
-        h2 {
-            color: #2E7D32;
-            margin-bottom: 20px;
-        }
+.card{
+    background:white;
+    padding:30px;
+    border-radius:12px;
+    box-shadow:0 2px 10px rgba(0,0,0,.1);
+}
 
-        label {
-            display: block;
-            margin-top: 15px;
-            font-weight: bold;
-        }
+label{
+    display:block;
+    margin-top:15px;
+    font-weight:bold;
+}
 
-        input,
-        select,
-        textarea {
-            width: 100%;
-            margin-top: 6px;
-            padding: 12px;
-            border-radius: 6px;
-            border: 1px solid #ccc;
-            font-size: 14px;
-        }
+input,
+select,
+textarea{
+    width:100%;
+    padding:12px;
+    margin-top:6px;
+    border-radius:6px;
+    border:1px solid #ccc;
+}
 
-        textarea {
-            min-height: 100px;
-        }
+button{
+    width:100%;
+    margin-top:25px;
+    padding:15px;
+    border:none;
+    background:#2E7D32;
+    color:white;
+    border-radius:8px;
+    cursor:pointer;
+}
 
-        button {
-            width: 100%;
-            margin-top: 25px;
-            padding: 15px;
-            font-size: 16px;
-            background: #2E7D32;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-        }
+button:hover{
+    background:#1B5E20;
+}
 
-        button:hover {
-            background: #1B5E20;
-        }
+.footer{
+    text-align:center;
+    padding:30px;
+    color:#666;
+}
 
-        .footer {
-            text-align: center;
-            padding: 30px;
-            color: #666;
-        }
-    </style>
+</style>
 </head>
 
 <body>
 
-    <div class="header">
-        <h1>ALYS Alimentos</h1>
-        <p>Portal de Citas de Proveedores</p>
-    </div>
+<div class="header">
 
-    <div class="container">
+<img
+    src="logoalys.png"
+    alt="ALYS"
+    class="logo"
+>
 
-        <div class="card">
+<h1>ALYS Alimentos</h1>
+<p>Portal de Citas de Proveedores</p>
 
-            <h2>Agendar Cita</h2>
+</div>
 
-            <label>Número de Proveedor</label>
-            <input type="text" id="NumeroProveedor">
+<div class="container">
 
-            <label>Correo Electrónico</label>
-            <input type="email" id="CorreoProveedor">
+<div class="card">
 
-            <label>Orden de Compra</label>
-            <input type="text" id="OrdenCompra">
+<h2>Agendar Cita</h2>
 
-            <label>Cantidad de Tarimas</label>
-            <input type="number" id="CantidadTarimas">
+<label>Número de Proveedor</label>
+<input
+    type="text"
+    id="NumeroProveedor"
+    onblur="buscarProveedor()"
+>
 
-            <label>Observaciones</label>
-            <textarea id="Observaciones"></textarea>
+<label>Empresa</label>
+<input
+    type="text"
+    id="NombreEmpresa"
+    readonly
+>
 
-            <label>Ubicación</label>
-            <select id="Ubicacion">
-                <option value="">Seleccione</option>
-                <option value="CEDIS">CEDIS</option>
-                <option value="PLANTA">PLANTA</option>
-            </select>
+<label>Correo Electrónico</label>
+<input type="email" id="CorreoProveedor">
 
-            <label>Fecha de Cita</label>
-            <input type="date" id="Fecha">
+<label>Orden de Compra</label>
+<input type="text" id="OrdenCompra">
 
-            <label>Hora Disponible</label>
-            <select id="Hora">
-                <option value="">Seleccione</option>
-                <option value="11:00">11:00</option>
-                <option value="12:00">12:00</option>
-                <option value="13:00">13:00</option>
-                <option value="15:00">15:00</option>
-                <option value="16:00">16:00</option>
-            </select>
+<label>Cantidad de Tarimas</label>
+<input type="number" id="CantidadTarimas">
 
-            <button onclick="agendarCita()">
-                Agendar Cita
-            </button>
+<label>Observaciones</label>
+<textarea id="Observaciones"></textarea>
 
-        </div>
+<label>Ubicación</label>
+<select id="Ubicacion">
+    <option value="">Seleccione</option>
+    <option value="CEDIS">CEDIS</option>
+    <option value="PLANTA">PLANTA</option>
+</select>
 
-    </div>
+<label>Fecha de Cita</label>
+<input type="date" id="Fecha">
 
-    <div class="footer">
-        ALYS Alimentos © 2026
-    </div>
+<label>Hora Disponible</label>
 
-    <script>
+<select id="Hora">
 
-        async function agendarCita() {
+<option value="">Seleccione</option>
 
-            
-const datos = {
-    NumeroProveedor: document.getElementById("NumeroProveedor").value,
-    CorreoProveedor: document.getElementById("CorreoProveedor").value,
-    OrdenCompra: document.getElementById("OrdenCompra").value,
-    CantidadTarimas: parseInt(document.getElementById("CantidadTarimas").value),
-    Observaciones: document.getElementById("Observaciones").value,
-    Ubicacion: document.getElementById("Ubicacion").value,
-    Fecha: document.getElementById("Fecha").value,
-    Hora: document.getElementById("Hora").value
-};
+<option value="11:00">11:00</option>
+<option value="11:30">11:30</option>
 
+<option value="12:00">12:00</option>
+<option value="12:30">12:30</option>
 
-            if (
-                !datos.NumeroProveedor ||
-                !datos.CorreoProveedor ||
-                !datos.OrdenCompra ||
-                !datos.CantidadTarimas ||
-                !datos.Ubicacion ||
-                !datos.Fecha ||
-                !datos.Hora
-            ) {
-                alert("Complete todos los campos obligatorios.");
-                return;
+<option value="13:00">13:00</option>
+<option value="13:30">13:30</option>
+
+<option value="15:00">15:00</option>
+<option value="15:30">15:30</option>
+
+<option value="16:00">16:00</option>
+<option value="16:30">16:30</option>
+
+</select>
+
+<button onclick="agendarCita()">
+Agendar Cita
+</button>
+
+</div>
+
+</div>
+
+<div class="footer">
+ALYS Alimentos © 2026
+</div>
+
+<script>
+
+const URL_AGENDAR =
+"URL_AGENDAR_CITA";
+
+const URL_PROVEEDOR =
+"URL_CONSULTAR_PROVEEDOR";
+
+async function buscarProveedor(){
+
+    const numero =
+        document.getElementById(
+            "NumeroProveedor"
+        ).value;
+
+    if(!numero) return;
+
+    try{
+
+        const respuesta = await fetch(
+            URL_PROVEEDOR,
+            {
+                method:"POST",
+                headers:{
+                    "Content-Type":"application/json"
+                },
+                body:JSON.stringify({
+                    NumeroProveedor:numero
+                })
             }
+        );
 
-            try {
+        const data =
+            await respuesta.json();
 
-                const respuesta = await fetch(
-                    "https://default1b4190e98a5241f39ace2f9b4e7419.08.environment.api.powerplatform.com:443/powerautomate/automations/direct/cu/03/workflows/b7eb7273214849b390c4a73ed496d4cd/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=Trwks-29jSbsLXwYco-Xn7ZmMu7F61hBvO03lruuZU4",
-                    {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json"
-                        },
-                        body: JSON.stringify(datos)
-                    }
-                );
+        console.log(data);
 
-                if (respuesta.ok) {
+        if(
+            data.value &&
+            data.value.length > 0
+        ){
 
-                    alert("✅ Cita registrada correctamente.");
+            document.getElementById(
+                "NombreEmpresa"
+            ).value =
+                data.value[0].NombreProveedor ||
+                "Proveedor encontrado";
 
-                    document.getElementById("NumeroProveedor").value = "";
-                    document.getElementById("CorreoProveedor").value = "";
-                    document.getElementById("OrdenCompra").value = "";
-                    document.getElementById("CantidadTarimas").value = "";
-                    document.getElementById("Observaciones").value = "";
-                    document.getElementById("Ubicacion").value = "";
-                    document.getElementById("Fecha").value = "";
-                    document.getElementById("Hora").value = "";
+        }
+        else{
 
-                } else {
-
-                    alert("❌ Error al registrar la cita.");
-
-                }
-
-            } catch (error) {
-
-                console.error(error);
-                alert("❌ Error al conectar con el servidor.");
-
-            }
+            document.getElementById(
+                "NombreEmpresa"
+            ).value =
+                "Proveedor no encontrado";
 
         }
 
-    </script>
+    }
+    catch(error){
+
+        console.error(error);
+
+        document.getElementById(
+            "NombreEmpresa"
+        ).value =
+            "Error al consultar";
+
+    }
+
+}
+
+async function agendarCita(){
+
+    const datos = {
+
+        NumeroProveedor:
+            document.getElementById("NumeroProveedor").value,
+
+        NombreEmpresa:
+            document.getElementById("NombreEmpresa").value,
+
+        CorreoProveedor:
+            document.getElementById("CorreoProveedor").value,
+
+        OrdenCompra:
+            document.getElementById("OrdenCompra").value,
+
+        CantidadTarimas:
+            parseInt(
+                document.getElementById(
+                    "CantidadTarimas"
+                ).value
+            ),
+
+        Observaciones:
+            document.getElementById(
+                "Observaciones"
+            ).value,
+
+        Ubicacion:
+            document.getElementById(
+                "Ubicacion"
+            ).value,
+
+        Fecha:
+            document.getElementById(
+                "Fecha"
+            ).value,
+
+        Hora:
+            document.getElementById(
+                "Hora"
+            ).value
+
+    };
+
+    if(
+        !datos.NumeroProveedor ||
+        !datos.CorreoProveedor ||
+        !datos.OrdenCompra ||
+        !datos.CantidadTarimas ||
+        !datos.Ubicacion ||
+        !datos.Fecha ||
+        !datos.Hora
+    ){
+        alert(
+            "Complete todos los campos obligatorios."
+        );
+        return;
+    }
+
+    try{
+
+        const respuesta =
+            await fetch(
+                URL_AGENDAR,
+                {
+                    method:"POST",
+                    headers:{
+                        "Content-Type":"application/json"
+                    },
+                    body:JSON.stringify(datos)
+                }
+            );
+
+        if(respuesta.ok){
+
+            alert(
+                "✅ Cita registrada correctamente."
+            );
+
+        }
+        else{
+
+            alert(
+                "❌ Error al registrar la cita."
+            );
+
+        }
+
+    }
+    catch(error){
+
+        console.error(error);
+
+        alert(
+            "❌ Error al conectar con el servidor."
+        );
+
+    }
+
+}
+
+</script>
 
 </body>
-
 </html>
