@@ -162,16 +162,18 @@
 
         async function agendarCita() {
 
-            const datos = {
-                NumeroProveedor: document.getElementById("NumeroProveedor").value,
-                CorreoProveedor: document.getElementById("CorreoProveedor").value,
-                OrdenCompra: document.getElementById("OrdenCompra").value,
-                CantidadTarimas: document.getElementById("CantidadTarimas").value,
-                Observaciones: document.getElementById("Observaciones").value,
-                Ubicacion: document.getElementById("Ubicacion").value,
-                Fecha: document.getElementById("Fecha").value,
-                Hora: document.getElementById("Hora").value
-            };
+            
+const datos = {
+    NumeroProveedor: document.getElementById("NumeroProveedor").value,
+    CorreoProveedor: document.getElementById("CorreoProveedor").value,
+    OrdenCompra: document.getElementById("OrdenCompra").value,
+    CantidadTarimas: parseInt(document.getElementById("CantidadTarimas").value),
+    Observaciones: document.getElementById("Observaciones").value,
+    Ubicacion: document.getElementById("Ubicacion").value,
+    Fecha: document.getElementById("Fecha").value,
+    Hora: document.getElementById("Hora").value
+};
+
 
             if (
                 !datos.NumeroProveedor ||
