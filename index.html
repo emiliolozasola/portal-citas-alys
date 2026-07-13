@@ -160,11 +160,70 @@
 
     <script>
 
-        function agendarCita() {
+        async function agendarCita() {
 
-            alert(
-                "Portal creado correctamente. En el siguiente paso lo conectaremos con Power Automate."
-            );
+            const datos = {
+                NumeroProveedor: document.getElementById("NumeroProveedor").value,
+                CorreoProveedor: document.getElementById("CorreoProveedor").value,
+                OrdenCompra: document.getElementById("OrdenCompra").value,
+                CantidadTarimas: document.getElementById("CantidadTarimas").value,
+                Observaciones: document.getElementById("Observaciones").value,
+                Ubicacion: document.getElementById("Ubicacion").value,
+                Fecha: document.getElementById("Fecha").value,
+                Hora: document.getElementById("Hora").value
+            };
+
+            if (
+                !datos.NumeroProveedor ||
+                !datos.CorreoProveedor ||
+                !datos.OrdenCompra ||
+                !datos.CantidadTarimas ||
+                !datos.Ubicacion ||
+                !datos.Fecha ||
+                !datos.Hora
+            ) {
+                alert("Complete todos los campos obligatorios.");
+                return;
+            }
+
+            try {
+
+                const respuesta = await fetch(
+                    "https://default1b4190e98a5241f39ace2f9b4e7419.08.environment.api.powerplatform.com:443/powerautomate/automations/direct/cu/03/workflows/b7eb7273214849b390c4a73ed496d4cd/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=Trwks-29jSbsLXwYco-Xn7ZmMu7F61hBvO03lruuZU4",
+                    {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify(datos)
+                    }
+                );
+
+                if (respuesta.ok) {
+
+                    alert("✅ Cita registrada correctamente.");
+
+                    document.getElementById("NumeroProveedor").value = "";
+                    document.getElementById("CorreoProveedor").value = "";
+                    document.getElementById("OrdenCompra").value = "";
+                    document.getElementById("CantidadTarimas").value = "";
+                    document.getElementById("Observaciones").value = "";
+                    document.getElementById("Ubicacion").value = "";
+                    document.getElementById("Fecha").value = "";
+                    document.getElementById("Hora").value = "";
+
+                } else {
+
+                    alert("❌ Error al registrar la cita.");
+
+                }
+
+            } catch (error) {
+
+                console.error(error);
+                alert("❌ Error al conectar con el servidor.");
+
+            }
 
         }
 
