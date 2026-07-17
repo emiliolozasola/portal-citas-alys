@@ -515,6 +515,17 @@ async function agendarCita(){
         );
         return;
     }
+    
+if(
+    datos.NombreEmpresa === "Proveedor no encontrado" ||
+    datos.NombreEmpresa === "Error al consultar" ||
+    datos.NombreEmpresa === ""
+){
+    alert(
+        "El número de proveedor no es válido. Verifique el proveedor antes de agendar la cita."
+    );
+    return;
+}
 
     try{
 
