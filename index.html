@@ -195,12 +195,17 @@ function actualizarHorarios() {
 
     if (!ubicacion || !fecha) return;
 
-    const dia =
-        new Date(fecha)
-            .toLocaleDateString(
-                "es-MX",
-                { weekday: "long" }
-            );
+    
+const dia =
+    new Date(fecha)
+        .toLocaleDateString(
+            "es-MX",
+            { weekday: "long" }
+        )
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "");
+
 
     let horarios = [];
 
@@ -226,7 +231,7 @@ function actualizarHorarios() {
             ];
 
         }
-        else if (dia === "miércoles") {
+        else if (dia === "miercoles") {
 
             horarios = [
                 "11:00",
@@ -255,7 +260,7 @@ function actualizarHorarios() {
         if (
             dia === "lunes" ||
             dia === "martes" ||
-            dia === "miércoles"
+            dia === "miercoles"
         ) {
 
             horarios = [
