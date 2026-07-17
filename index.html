@@ -244,18 +244,6 @@ async function ocultarHorariosOcupados() {
 
     }
 
-horarios.forEach(hora => {
-
-    let option =
-        document.createElement("option");
-
-    option.value = hora;
-    option.text = hora;
-
-    combo.appendChild(option);
-
-});
-
 }
 
     
@@ -387,10 +375,7 @@ horarios.forEach(hora => {
 
 });
 
-ocultarHorariosOcupados();
-
 }
-
 
     horarios.forEach(hora => {
 
@@ -403,7 +388,9 @@ ocultarHorariosOcupados();
         combo.appendChild(option);
 
     });
-
+    
+ocultarHorariosOcupados();
+    
 }
  
 window.onload = function() {
