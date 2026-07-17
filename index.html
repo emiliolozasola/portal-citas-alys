@@ -332,14 +332,29 @@ async function agendarCita(){
                 }
             );
 
-       
+
 if(respuesta.ok){
 
-document.getElementById("mensaje").innerHTML =
-"✅ Su cita fue registrada exitosamente. En breve recibirá un correo de confirmación.";
+    document.getElementById("mensaje").innerHTML =
+    "✅ Su cita fue registrada exitosamente. En breve recibirá un correo de confirmación.";
 
+    document.getElementById("NumeroProveedor").value = "";
+    document.getElementById("NombreEmpresa").value = "";
+    document.getElementById("CorreoProveedor").value = "";
+    document.getElementById("OrdenCompra").value = "";
+    document.getElementById("CantidadTarimas").value = "";
+    document.getElementById("Observaciones").value = "";
+    document.getElementById("Ubicacion").value = "";
+    document.getElementById("Fecha").value = "";
+    document.getElementById("Hora").value = "";
 
+ window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+    
 }
+
 
         else{
 
