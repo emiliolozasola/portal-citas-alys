@@ -196,8 +196,17 @@ function actualizarHorarios() {
     if (!ubicacion || !fecha) return;
 
     
+
+const partes = fecha.split("-");
+
+const fechaLocal = new Date(
+    partes[0],
+    partes[1] - 1,
+    partes[2]
+);
+
 const dia =
-    new Date(fecha)
+    fechaLocal
         .toLocaleDateString(
             "es-MX",
             { weekday: "long" }
@@ -205,6 +214,7 @@ const dia =
         .toLowerCase()
         .normalize("NFD")
         .replace(/[\u0300-\u036f]/g, "");
+
 
 
     let horarios = [];
