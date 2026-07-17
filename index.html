@@ -130,35 +130,20 @@ button:hover{
 <textarea id="Observaciones"></textarea>
 
 <label>Ubicación</label>
-<select id="Ubicacion">
+<select id="Ubicacion" onchange="actualizarHorarios()">
     <option value="">Seleccione</option>
     <option value="CEDIS">CEDIS</option>
     <option value="PLANTA">PLANTA</option>
 </select>
 
 <label>Fecha de Cita</label>
-<input type="date" id="Fecha">
+<input type="date" id="Fecha" onchange="actualizarHorarios()">
 
 <label>Hora Disponible</label>
 
 <select id="Hora">
 
 <option value="">Seleccione</option>
-
-<option value="11:00">11:00</option>
-<option value="11:30">11:30</option>
-
-<option value="12:00">12:00</option>
-<option value="12:30">12:30</option>
-
-<option value="13:00">13:00</option>
-<option value="13:30">13:30</option>
-
-<option value="15:00">15:00</option>
-<option value="15:30">15:30</option>
-
-<option value="16:00">16:00</option>
-<option value="16:30">16:30</option>
 
 </select>
 
@@ -193,6 +178,118 @@ const URL_AGENDAR =
 
 const URL_PROVEEDOR =
 "https://default1b4190e98a5241f39ace2f9b4e7419.08.environment.api.powerplatform.com:443/powerautomate/automations/direct/cu/05/workflows/337d6814d0404fcda35554e8a42b1ef0/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=-V2xuFKYi3vLNEJmn-HxZVgPTgdYTxIWdjsLfWPqHPQ";
+
+function actualizarHorarios() {
+
+    const ubicacion =
+        document.getElementById("Ubicacion").value;
+
+    const fecha =
+        document.getElementById("Fecha").value;
+
+    const combo =
+        document.getElementById("Hora");
+
+    combo.innerHTML =
+        '<option value="">Seleccione</option>';
+
+    if (!ubicacion || !fecha) return;
+
+    const dia =
+        new Date(fecha)
+            .toLocaleDateString(
+                "es-MX",
+                { weekday: "long" }
+            );
+
+    let horarios = [];
+
+    if (ubicacion === "CEDIS") {
+
+        if (
+            dia === "lunes" ||
+            dia === "martes" ||
+            dia === "viernes"
+        ) {
+
+            horarios = [
+                "11:00",
+                "11:30",
+                "12:00",
+                "12:30",
+                "13:00",
+                "13:30",
+                "15:00",
+                "15:30",
+                "16:00",
+                "16:30"
+            ];
+
+        }
+        else if (dia === "miércoles") {
+
+            horarios = [
+                "11:00",
+                "11:30",
+                "12:00",
+                "12:30",
+                "13:00",
+                "13:30"
+            ];
+
+        }
+        else {
+
+            alert(
+                "CEDIS solo permite citas lunes, martes, miércoles y viernes."
+            );
+
+            document.getElementById("Fecha").value = "";
+
+            return;
+        }
+    }
+
+    if (ubicacion === "PLANTA") {
+
+        if (
+            dia === "lunes" ||
+            dia === "martes" ||
+            dia === "miércoles"
+        ) {
+
+            horarios = [
+                "11:00",
+                "12:00",
+                "13:00"
+            ];
+
+        }
+        else {
+
+            alert(
+                "PLANTA solo permite citas lunes, martes y miércoles."
+            );
+
+            document.getElementById("Fecha").value = "";
+
+            return;
+        }
+    }
+
+    horarios.forEach(hora => {
+
+        let option =
+            document.createElement("option");
+
+        option.value = hora;
+        option.text = hora;
+
+        combo.appendChild(option);
+
+    });
+
+}
 
 async function buscarProveedor(){
 
