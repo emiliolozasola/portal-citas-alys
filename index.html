@@ -395,12 +395,15 @@ window.onload = function() {
 
 };   
 
+
 async function buscarProveedor(){
 
     const numero =
         document.getElementById(
             "NumeroProveedor"
-        ).value;
+        ).value
+        .trim()
+        .toUpperCase();
 
     if(!numero) return;
 
@@ -422,18 +425,17 @@ async function buscarProveedor(){
         const data =
             await respuesta.json();
 
-        console.log(data);
+        const proveedor =
+            data.value.find(
+                p => p.field_0 === numero
+            );
 
-        if(
-            data.value &&
-            data.value.length > 0
-        ){
+        if(proveedor){
 
             document.getElementById(
                 "NombreEmpresa"
             ).value =
-                data.value[0].NombreProveedor ||
-                "Proveedor encontrado";
+                proveedor.Title;
 
         }
         else{
@@ -458,6 +460,7 @@ async function buscarProveedor(){
     }
 
 }
+
 
 async function agendarCita(){
 
