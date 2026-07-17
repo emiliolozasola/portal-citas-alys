@@ -295,6 +295,23 @@ const dia =
     });
 
 }
+ 
+window.onload = function() {
+
+    const fechaInput =
+        document.getElementById("Fecha");
+
+    let minimo = new Date();
+
+    minimo.setDate(
+        minimo.getDate() + 2
+    );
+
+    fechaInput.min =
+        minimo.toISOString()
+              .split("T")[0];
+
+};   
 
 async function buscarProveedor(){
 
