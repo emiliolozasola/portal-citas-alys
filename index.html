@@ -183,7 +183,6 @@ const URL_PROVEEDOR =
 const URL_HORARIOS =
 "https://default1b4190e98a5241f39ace2f9b4e7419.08.environment.api.powerplatform.com:443/powerautomate/automations/direct/cu/30/workflows/0596858fd1634417b0f469a496c3ac01/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=iRKHmpRvuX_-W6tANxRyaPWWMI07B17ipADXHDqlaFU";
 
-
 async function ocultarHorariosOcupados() {
 
     const ubicacion =
@@ -361,19 +360,6 @@ console.log("Día detectado:", dia);
             return;
         }
     }
-
-    
-horarios.forEach(hora => {
-
-    let option =
-        document.createElement("option");
-
-    option.value = hora;
-    option.text = hora;
-
-    combo.appendChild(option);
-
-});
 
 }
 
