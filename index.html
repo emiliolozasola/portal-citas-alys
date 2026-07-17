@@ -443,14 +443,15 @@ async function buscarProveedor(){
         }
 
     }
-    catch(error){
+   
+catch(error){
 
-        console.error(error);
+    console.error(error);
 
-        document.getElementById(
-            "NombreEmpresa"
-        ).value =
-            "Error al consultar";
+    document.getElementById(
+        "NombreEmpresa"
+    ).value =
+        "Error al consultar";
 
     }
 
