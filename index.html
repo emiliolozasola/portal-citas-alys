@@ -401,9 +401,7 @@ async function buscarProveedor(){
     const numero =
         document.getElementById(
             "NumeroProveedor"
-        ).value
-        .trim()
-        .toUpperCase();
+        ).value.trim().toUpperCase();
 
     if(!numero) return;
 
@@ -415,10 +413,7 @@ async function buscarProveedor(){
                 method:"POST",
                 headers:{
                     "Content-Type":"application/json"
-                },
-                body:JSON.stringify({
-                    NumeroProveedor:numero
-                })
+                }
             }
         );
 
@@ -459,7 +454,6 @@ async function buscarProveedor(){
 
     }
 
-}
 
 
 async function agendarCita(){
